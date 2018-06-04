@@ -17,7 +17,6 @@ def _fetch_raw_habr_page(page_num):
     url = 'http://habr.com/all/'
     if page_num:
         url += 'page{}/'.format(page_num)
-    print(url)
     return requests.get(url).text
 
 
@@ -28,7 +27,7 @@ def parse_raw_habr_page(raw_page):
         article_date = article_block.find('span', {'class': 'post__time'})
         article_title = article_block.find('a', {'class': 'post__title_link'})
         articles_info.append({
-            'date': normalize_habr_date(article_date.contents[0]),
+            'date': normalize_habr_date_v2(article_date.contents[0]),
             'title': article_title.contents[0],
         })
     return articles_info
@@ -70,4 +69,3 @@ def normalize_habr_date_v2(habr_format_datetime_string):
     month = months_ru_to_en[date_list[1]] if len(date_list) >= 2 else date.today().month
     day = one_word_date[date_list[0]] if date_list[0].isalpha() else int(date_list[0])
     return date(year, month, day)
-
