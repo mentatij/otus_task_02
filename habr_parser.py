@@ -8,13 +8,12 @@ def fetch_raw_habr_feed(pages=10, start_page=1):
     start_page_num = start_page if start_page < 100 else 100
     end_page_num = start_page + pages if (start_page + pages) < 100 else 100
     raw_pages = []
-    for page_num in range(start_page_num, end_page_num):
+    for page_num in range(start_page_num, end_page_num + 1):
         raw_pages.append(_fetch_raw_habr_page(page_num))
     return raw_pages
 
 
-def _fetch_raw_habr_page(page_num):
-    url = 'http://habr.com/all/'
+def _fetch_raw_habr_page(page_num, url='http://habr.com/all/'):
     if page_num:
         url += 'page{}/'.format(page_num)
     return requests.get(url).text
@@ -34,7 +33,7 @@ def parse_raw_habr_page(raw_page):
 
 
 def normalize_habr_date(habr_format_datetime_string):
-    """Possible formats example: 'сегодня в 14:59', 'вчера в 21:23', '27 мая в 15:57', '14 февраля 2007 в 00:30"""
+    """Possible format examples: 'сегодня в 14:59', 'вчера в 21:23', '27 мая в 15:57', '14 февраля 2007 в 00:30"""
     date_list = habr_format_datetime_string.split()[:-2]  # real strange thing happens with ' ' in split argument
     months_ru_to_en = {'января': 1, 'февраля': 2, 'марта': 3,
                        'апреля': 4, 'мая': 5, 'июня': 6,
@@ -54,7 +53,7 @@ def normalize_habr_date(habr_format_datetime_string):
 
 
 def normalize_habr_date_v2(habr_format_datetime_string):
-    """Possible formats example: 'сегодня в hh:mm', 'вчера в hh:mm', 'dd month_ru в hh:mm', 'dd month_ru yyyy в hh:mm"""
+    """Possible format examples: 'сегодня в hh:mm', 'вчера в hh:mm', 'dd month_ru в hh:mm', 'dd month_ru yyyy в hh:mm"""
     date_list = habr_format_datetime_string.split()[:-2]  # real strange thing happens with ' ' in split argument
     if len(date_list) == 0:
         print('Wrong date value')
