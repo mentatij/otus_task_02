@@ -6,7 +6,7 @@ Habr Stats is tool for analyzing the frequency of using words in the main feed o
 
 ### Installation
 
-1. clone or download the project and install the requirements:
+Clone or download the project and install the requirements:
 ```zsh
 $ git clone https://github.com/mentatij/otus_task_02.git
 $ cd otus_task_01
