@@ -33,6 +33,18 @@ Full format of usage is ```habr_stat.py [-h] [--pages int] [--start int] [--min 
 
 Use ```habr_stat.py --help``` to see more details.
 
+There is opportunity to use tool not only for main habr.com feed by using parametr ```url```.
+```zsh
+$ python3 habr_stat.py --url=https://habr.com/top/
+Pages parsed: 6
+Weeks parsed (may be not fully): 1
+----------------------------------------------------------------------------------------------------
+Start of week | End of week | Top5 most popular words
+----------------------------------------------------------------------------------------------------
+  2018-06-18  | 2018-06-24  | разработка помощь security работа доклад
+----------------------------------------------------------------------------------------------------
+```
+
 ### Docs
 No additional docs, just this README.md
 
