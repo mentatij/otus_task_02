@@ -42,13 +42,13 @@ if __name__ == '__main__':
     help_message = '''Habr Stats is tool for analyzing the frequency of using words in the main feed of habr.com'''
     parser = argparse.ArgumentParser(description=help_message, formatter_class=argparse.MetavarTypeHelpFormatter)
     parser.add_argument('--pages', type=int,
-                        help='Number of pages to parse', default=10)
+                        help='Number of pages to parse (10 by default)', default=10)
     parser.add_argument('--start', type=int,
-                        help='Start page number', default=1)
+                        help='Start page number (1 by default)', default=1)
     parser.add_argument('--min', type=int,
-                        help='The minimum length of a word that gets into statistics', default=5)
+                        help='The minimum length of a word that gets into statistics (5 by default)', default=5)
     parser.add_argument('--top', type=int,
-                        help='The quantity of  most popular words that gets into statistics', default=5)
+                        help='The quantity of  most popular words that gets into statistics (5 by default)', default=5)
     command_line_arguments = parser.parse_args()
 
     pages = command_line_arguments.pages
