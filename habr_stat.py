@@ -37,7 +37,10 @@ def normalize_words(words_list):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Some message', formatter_class=argparse.MetavarTypeHelpFormatter)
+
+    # Parsing arguments of command line
+    help_message = '''Habr Stats is tool for analyzing the frequency of using words in the main feed of habr.com'''
+    parser = argparse.ArgumentParser(description=help_message, formatter_class=argparse.MetavarTypeHelpFormatter)
     parser.add_argument('--pages', type=int,
                         help='Number of pages to parse', default=10)
     parser.add_argument('--start', type=int,
@@ -53,14 +56,16 @@ if __name__ == '__main__':
     min_word_len = command_line_arguments.min
     top = command_line_arguments.top
 
+    # Main program flow
     raw_pages = fetch_raw_habr_feed(pages, start_page)
     articles_info = []
     for raw_page in raw_pages:
         articles_info += parse_raw_habr_page(raw_page)
     articles_info_by_weeks = group_articles_info_by_weeks(articles_info)
 
+    # Output statistic
     print('Pages parsed:', len(raw_pages))
-    print('Weeks parsed (may not fully):', len(articles_info_by_weeks))
+    print('Weeks parsed (may be not fully):', len(articles_info_by_weeks))
     print('-' * 100)
     print('Start of week | End of week | Top{} most popular words'.format(top))
     for week in articles_info_by_weeks:

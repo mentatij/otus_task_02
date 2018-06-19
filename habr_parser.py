@@ -6,17 +6,20 @@ import requests
 
 def fetch_raw_habr_feed(pages=10, start_page=1):
     start_page_num = start_page if start_page < 100 else 100
-    end_page_num = start_page + pages if (start_page + pages) < 100 else 100
+    end_page_num = start_page + pages if (start_page + pages) < 101 else 101
     raw_pages = []
-    for page_num in range(start_page_num, end_page_num + 1):
-        raw_pages.append(_fetch_raw_habr_page(page_num))
+    for page_num in range(start_page_num, end_page_num):
+        page_request_result = _fetch_raw_habr_page(page_num)
+        if page_request_result:
+            raw_pages.append(page_request_result.text)
     return raw_pages
 
 
 def _fetch_raw_habr_page(page_num, url='http://habr.com/all/'):
     if page_num:
         url += 'page{}/'.format(page_num)
-    return requests.get(url).text
+    print(url)
+    return requests.get(url)
 
 
 def parse_raw_habr_page(raw_page):
