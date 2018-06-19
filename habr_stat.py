@@ -49,21 +49,24 @@ if __name__ == '__main__':
                         help='The minimum length of a word that gets into statistics (5 by default)', default=5)
     parser.add_argument('--top', type=int,
                         help='The quantity of  most popular words that gets into statistics (5 by default)', default=5)
+    parser.add_argument('--url', type=str,
+                        help='Url of feed to parse (http://habr.com/all/ by default)', default='http://habr.com/all/')
     command_line_arguments = parser.parse_args()
 
     pages = command_line_arguments.pages
     start_page = command_line_arguments.start
     min_word_len = command_line_arguments.min
     top = command_line_arguments.top
+    url = command_line_arguments.url
 
     # Main program flow
-    raw_pages = fetch_raw_habr_feed(pages, start_page)
+    raw_pages = fetch_raw_habr_feed(pages, start_page, url)
     articles_info = []
     for raw_page in raw_pages:
         articles_info += parse_raw_habr_page(raw_page)
     articles_info_by_weeks = group_articles_info_by_weeks(articles_info)
 
-    # Output statistic
+    # Output
     print('Pages parsed:', len(raw_pages))
     print('Weeks parsed (may be not fully):', len(articles_info_by_weeks))
     print('-' * 100)

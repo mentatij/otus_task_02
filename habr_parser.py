@@ -4,12 +4,12 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def fetch_raw_habr_feed(pages=10, start_page=1):
+def fetch_raw_habr_feed(pages=10, start_page=1, url='http://habr.com/all/'):
     start_page_num = start_page if start_page < 100 else 100
     end_page_num = start_page + pages if (start_page + pages) < 101 else 101
     raw_pages = []
     for page_num in range(start_page_num, end_page_num):
-        page_request_result = _fetch_raw_habr_page(page_num)
+        page_request_result = _fetch_raw_habr_page(page_num, url)
         if page_request_result:
             raw_pages.append(page_request_result.text)
     return raw_pages
