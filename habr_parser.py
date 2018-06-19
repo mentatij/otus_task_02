@@ -18,7 +18,6 @@ def fetch_raw_habr_feed(pages=10, start_page=1):
 def _fetch_raw_habr_page(page_num, url='http://habr.com/all/'):
     if page_num:
         url += 'page{}/'.format(page_num)
-    print(url)
     return requests.get(url)
 
 
