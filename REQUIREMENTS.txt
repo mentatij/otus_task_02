@@ -9,4 +9,4 @@ pymorphy2==0.8
 pymorphy2-dicts==2.4.393442.3710985
 pymorphy2-dicts-ru==2.4.404381.4453942
 requests==2.18.4
-urllib3==1.22
+urllib3==1.26.5
